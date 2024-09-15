@@ -16,8 +16,9 @@ export default class Menu {
         throw new Error('error while getting data')
     }
     public async getMenuById(doc:any) {
-        let a = await this.mongo.save('Users',doc)
-        console.log(a);
+        const response = await this.mongo.findOne('Menu',doc)
+        if(response?._doc?.MENU_ID) return {status:200,data:{status: 200,data: response._doc}}
+        throw new Error('error while getting data')
     }
     public async updateMenu(doc:any) {
         let a = await this.mongo.save('Users',doc)
