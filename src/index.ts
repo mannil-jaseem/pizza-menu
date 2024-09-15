@@ -25,7 +25,7 @@ if (false) {
     const port = process.env.PORT
     const corsOptions: cors.CorsOptions = {
         origin: "*", 
-        methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+        methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'], 
         allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true, 
       }
