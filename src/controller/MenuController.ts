@@ -5,11 +5,11 @@ import { CreateMenu } from "./Menu.validation"
 
 @Controller("/menu")
 export class MenuController {
-    @Post("/")
+    @Post("/create")
     async createMenu(@Req() req: Request, @Res() res: Response) {
         try {
-            // let body = CreateMenu.parse(req.body)
-            let { status, data } = await new MENU_SERVICE().createMenu(req.body)
+            let body = CreateMenu.parse(req.body)
+            let { status, data } = await new MENU_SERVICE().createMenu(body)
             return res
                 .status(status)
                 .json(data);
@@ -27,26 +27,27 @@ export class MenuController {
                     .json({ msg: err.message || 'something went wrong' });
         }
     }
-    // @Get("/list")
-    // async getMenuList(@Req() req: Request, @Res() res: Response) {
-    //     try {
-    //         console.log(req)
-    //         await new SignUp().init(req.body)
-    //         return res.json({aaa:"aa"})
+    @Get("/list")
+    async getMenuList(@Req() req: Request, @Res() res: Response) {
+        try {
+            const { status, data } = await new MENU_SERVICE().getMenuList(req?.body)
+            return res
+                .status(status)
+                .json(data);
 
-    //     } catch (err: any) {
-    //         console.log(err);
-    //         if (err.name = 'ZodError') {
-    //             let i = err.issues[err.issues.length-1]
-    //             return res
-    //                 .status(400)
-    //                 .json({ msg: i.message || 'something went wrong' });
-    //         } else
-    //             return res
-    //                 .status(404)
-    //                 .json({ msg: 'something went wrong' });
-    //     }
-    // }
+        } catch (err: any) {
+            console.log(err);
+            if (err.name = 'ZodError') {
+                let i = err.issues[err.issues.length-1]
+                return res
+                    .status(400)
+                    .json({ msg: i.message || 'something went wrong' });
+            } else
+                return res
+                    .status(404)
+                    .json({ msg: 'something went wrong' });
+        }
+    }
     // @Get("/details")
     // async getMenuById(@Req() req: Request, @Res() res: Response) {
     //     try {

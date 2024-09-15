@@ -8,6 +8,7 @@ import { useExpressServer } from "routing-controllers"
 import "./controller/MenuController";
 import morgan from "morgan"
 import Connection from "./database/connection";
+import cors from "cors"
 
 if (false) {
     let numCpus = cpus().length
@@ -22,6 +23,13 @@ if (false) {
 } else {
     const app = express()
     const port = process.env.PORT
+    const corsOptions: cors.CorsOptions = {
+        origin: "*", 
+        methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true, 
+      }
+    app.use(cors(corsOptions))
     app.use(express.json())
     app.use(express.urlencoded({ extended: false }))
     useExpressServer(app)

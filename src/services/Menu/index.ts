@@ -8,11 +8,12 @@ export default class Menu {
     public async createMenu(doc:any) {
         let menuItem = await this.mongo.save('Menu',doc)
         if (menuItem?.MENU_ID) return {status:201,data:{message:'successfully added food'}}
-        else throw new Error('error while saving data')
+        throw new Error('error while saving data')
     }
     public async getMenuList(doc:any) {
-        let a = await this.mongo.save('Users',doc)
-        console.log(a);
+        const response = await this.mongo.find('Menu',doc)
+        if(response) return {status:200,data:{status: 200,data: response}}
+        throw new Error('error while getting data')
     }
     public async getMenuById(doc:any) {
         let a = await this.mongo.save('Users',doc)

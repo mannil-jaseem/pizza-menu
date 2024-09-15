@@ -10,12 +10,12 @@ export default class MongoCRUD {
         let resulObj = result.toJSON()
         return resulObj
     }
-    public async findOne(model: keyof typeof main_db, filter: typeof main_db) {
-        let result = await this.db[model].findOne(filter)
+    public async find(model: keyof typeof main_db, filter: typeof main_db) {
+        let result = await this.db[model].find(filter)
         return result
     }
-    public async findMany(model: keyof typeof main_db, data: object) {
-        let result = await this.db[model].create(data)
+    public async findOne(model: keyof typeof main_db, filter: typeof main_db) {
+        let result = await this.db[model].findOne(filter)
         return result
     }
 }
