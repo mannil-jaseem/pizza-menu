@@ -18,4 +18,8 @@ export default class MongoCRUD {
         let result = await this.db[model].findOne(filter)
         return result
     }
+    public async findOneAndUpdate(model: keyof typeof main_db, filter: typeof main_db, data: object) {
+        let result = await this.db[model].findOneAndUpdate(filter,data)
+        return result
+    }
 }
