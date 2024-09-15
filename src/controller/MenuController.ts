@@ -1,7 +1,7 @@
 import { Controller, Req, Res, Post, UseBefore, Get, Put, Patch } from "routing-controllers";
 import { Request, Response } from "express";
 import MENU_SERVICE from "../services/Menu";
-import { CreateMenu } from "./Menu.validation"
+import { CreateMenu, MenuDetails, UpdateMenu, UpdateMenuStatus } from "./Menu.validation"
 
 @Controller("/menu")
 export class MenuController {
@@ -30,7 +30,7 @@ export class MenuController {
     @Get("/list")
     async getMenuList(@Req() req: Request, @Res() res: Response) {
         try {
-            const { status, data } = await new MENU_SERVICE().getMenuList(req?.body)
+            const { status, data } = await new MENU_SERVICE().getMenuList({})
             return res
                 .status(status)
                 .json(data);
@@ -51,7 +51,8 @@ export class MenuController {
     @Get("/details")
     async getMenuById(@Req() req: Request, @Res() res: Response) {
         try {
-            const { status, data } = await new MENU_SERVICE().getMenuById(req?.query)
+            let body = MenuDetails.parse(req.query)
+            const { status, data } = await new MENU_SERVICE().getMenuById(body)
             return res
                 .status(status)
                 .json(data);
@@ -72,11 +73,12 @@ export class MenuController {
     @Put("/")
     async updateMenu(@Req() req: Request, @Res() res: Response) {
         try {
-            const { MENU_ID } = req?.body
+            let body = UpdateMenu.parse(req.body)
+            const { MENU_ID } = body
             const filter = {
                 MENU_ID
             }
-            const { status, data } = await new MENU_SERVICE().updateMenu(filter,req?.body)
+            const { status, data } = await new MENU_SERVICE().updateMenu(filter,body)
             return res
                 .status(status)
                 .json(data);
@@ -97,7 +99,8 @@ export class MenuController {
     @Patch("/status")
     async updateMenuStatus(@Req() req: Request, @Res() res: Response) {
         try {
-            const { MENU_ID,STATUS } = req?.body
+            let body = UpdateMenuStatus.parse(req.body)
+            const { MENU_ID,STATUS } = body
             const filter = {
                 MENU_ID
             }
