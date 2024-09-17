@@ -5,12 +5,13 @@ import express from "express"
 import cluster, { Worker } from "cluster"
 import { cpus } from "os"
 import { useExpressServer } from "routing-controllers"
-import "./controller/MenuController";
+import "./controller/menu/MenuController";
+import "./controller/order/OrderController";
 import morgan from "morgan"
 import Connection from "./database/connection";
 import cors from "cors"
 
-if (false) {
+if (cluster.isPrimary) {
     let numCpus = cpus().length
     for (let i = 0; i < numCpus; i++) {
         cluster.fork()

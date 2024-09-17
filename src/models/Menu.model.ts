@@ -6,6 +6,7 @@ export interface IMenu {
     MENU_NAME: string;
     DESCRIPTION: string;
     PRICE: number;
+    PREP_TIME: number;
     SIZE: string;
     STATUS: boolean;
     TYPE: string;
@@ -17,6 +18,7 @@ const menuSchema = new Schema<IMenu>({
     MENU_NAME: { type: String, required: true },
     DESCRIPTION: { type: String, required: true },
     PRICE: { type: Number, required: true },
+    PREP_TIME: { type: Number, required: true },
     SIZE: { type: String, required: true, enum: ['Small', 'Medium', 'Large'] },
     STATUS: { type: Boolean, required: true, default: true },
     TYPE: { type: String, required: true, enum: ['Food', 'Drink'] },

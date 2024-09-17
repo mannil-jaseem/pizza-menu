@@ -7,6 +7,7 @@ export interface IOrder {
     DATE: Date;
     ITEMS: Array<{ MENU_ID: string, QUANTITY: number, PRICE: number, TOTAL: number }>;
     AMOUNT: number;
+    PREP_TIME: number;
     STATUS: string;
 }
 
@@ -21,6 +22,7 @@ const orderSchema = new Schema<IOrder>({
         TOTAL: { type: Number, required: true },// quatity * price
     }],
     AMOUNT: { type: Number, required: true },
+    PREP_TIME: { type: Number },
     STATUS: { type: String, required: true, enum:['Pending','In-progress','Completed'] }
 }, {
     versionKey: false,

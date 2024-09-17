@@ -4,6 +4,7 @@ export const CreateMenu = z.object({
     MENU_NAME: z.string().min(1, "Menu name is required."),
     DESCRIPTION: z.string().min(1, "Description is required."),
     PRICE: z.number().positive("Price must be a positive number."),
+    PREP_TIME: z.number().positive("Preparation time must be a positive number."),
     SIZE: z.enum(['Small', 'Medium', 'Large'], {
         errorMap: () => ({ message: "Size must be either 'Small', 'Medium', or 'Large'." })
     }),
@@ -28,6 +29,7 @@ export const UpdateMenu = z.object({
     MENU_NAME: z.string().min(1, "Menu name is required."),
     DESCRIPTION: z.string().min(1, "Description is required."),
     PRICE: z.number().positive("Price must be a positive number."),
+    PREP_TIME: z.number().positive("Preparation time must be a positive number."),
     SIZE: z.enum(['Small', 'Medium', 'Large'], {
         errorMap: () => ({ message: "Size must be either 'Small', 'Medium', or 'Large'." })
     }),
